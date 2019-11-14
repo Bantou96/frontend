@@ -1,11 +1,14 @@
-<h1>mes compteurs</h1>
-<button (click)="reset()">reset all counters</button>
-<div class="espace">
-    <app-counter [position]="1" ></app-counter>
-</div>
-<div class="espace">
-    <app-counter [position]="2" ></app-counter>
-</div>
-<div class="espace">
-    <app-counter [position]="3" ></app-counter>
-</div>
+<mat-card class="titre">
+        <mat-card-title>
+            <h1>Les Compteurs LPA-2019</h1> 
+        </mat-card-title>
+        <mat-card-actions>
+            <!--<button mat-button (click)="reset()" >Réinitialiser les compteurs</button> -->
+        </mat-card-actions>
+    </mat-card>
+    
+    <div class="counters">
+        <app-dashboard 
+            *ngFor="let counter of counters"
+            [position]='counter.id'></app-dashboard>
+    </div>

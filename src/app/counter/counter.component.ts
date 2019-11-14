@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CounterService } from '../counter.service';
 import { Observable } from 'rxjs';
 import { Counter } from '../counter';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -11,23 +12,30 @@ import { Counter } from '../counter';
 })
 export class CounterComponent implements OnInit {
 
-  @Input() position: number;
+  counter: Counter = new Counter();
 
-  value: Counter;
-
-  constructor(public counterService: CounterService) { }
+  constructor(public counterService: CounterService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log("call counter")
-    this.counterService.getCounterValue(this.position)
-          .subscribe(counter => this.value = counter) 
-         
+    this.route.params.subscribe(
+      () => {
+        this.getCounter();
+      }
+    )
+  }
+  getCounter() {
+    this.counter.id = +this.route.snapshot.paramMap.get('id'); 
+    this.counterService.getCounter(this.counter.id)
+      .subscribe(counter => {
+        this.counter = counter;
+      });
   }
 
   increment() {
-    if(this.position == 1) this.counterService.increment(59).subscribe(counter => this.value = counter);
-    if(this.position == 2) this.counterService.increment(60).subscribe(counter => this.value = counter);
-    if(this.position == 3) this.counterService.increment(61).subscribe(counter => this.value = counter);
+    this.counterService.increment(this.counter.id)
+      .subscribe(counter => {
+        this.counter.value = counter.value;
+      });
   }
 
 }

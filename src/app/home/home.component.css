@@ -1,4 +1,10 @@
-.espace {
+.titre {
+  margin-bottom: 30px;
+  
+}
 
-    margin-bottom: 10px;
-  }
+.counters {
+  display: grid;
+  width: 100em;
+  
+}
