@@ -19,7 +19,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import { ActionCableService } from 'angular2-actioncable';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,9 +43,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatListModule,
     MatCardModule,
     HttpClientModule,
-    MatMenuModule
+    MatMenuModule,
   ],
-  providers: [],
+  providers: [ActionCableService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
